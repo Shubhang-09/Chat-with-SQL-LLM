@@ -1,5 +1,11 @@
 # Chat with SQL Database using LLM
 
+## Live Demo
+
+https://chat-with-sql-llm-k6gvqlj6iyu7ipazkchoqd.streamlit.app
+
+## Overview
+
 This project allows users to query a SQL database using natural language.  
 It converts user input into SQL queries using a Groq-powered LLM and executes them on either SQLite or MySQL.
 
