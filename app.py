@@ -64,7 +64,6 @@ llm = ChatGroq(
 
 
 # ---------------- DATABASE CONFIG ----------------
-@st.cache_resource
 def configure_db():
     if db_uri == LOCALDB:
         db_path = (Path(__file__).parent / "student.db").absolute()
@@ -81,13 +80,10 @@ def configure_db():
         )
         return SQLDatabase(engine)
 
-
 db = configure_db()
 
-
 # ---------------- AGENT ----------------
-@st.cache_resource
-def create_agent_cached():
+def create_agent():
     toolkit = SQLDatabaseToolkit(db=db, llm=llm)
 
     return create_sql_agent(
@@ -95,9 +91,7 @@ def create_agent_cached():
         toolkit=toolkit,
         verbose=True
     )
-
-
-agent = create_agent_cached()
+agent = create_agent()
 
 
 # ---------------- CHAT MEMORY ----------------
