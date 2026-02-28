@@ -39,7 +39,17 @@ else:
 
 
 # ---------------- API KEY ----------------
-api_key = st.sidebar.text_input("Groq API Key", type="password")
+# First try to get key from Streamlit secrets (for deployed app)
+api_key = None
+
+try:
+    api_key = st.secrets["GROQ_API_KEY"]
+except Exception:
+    pass
+
+# If not found in secrets, allow manual input (for local use)
+if not api_key:
+    api_key = st.sidebar.text_input("Groq API Key", type="password")
 
 if not api_key:
     st.info("Please enter your Groq API Key to continue.")
