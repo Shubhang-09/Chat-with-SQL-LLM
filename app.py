@@ -80,7 +80,17 @@ def configure_db():
         )
         return SQLDatabase(engine)
 
-db = configure_db()
+db = None
+
+if db_uri == LOCALDB:
+    db = configure_db()
+
+elif db_uri == MYSQL:
+    if mysql_host and mysql_user and mysql_password and mysql_db:
+        db = configure_db()
+    else:
+        st.info("Please fill MySQL details to connect.")
+        st.stop()
 
 # ---------------- AGENT ----------------
 def create_agent():
