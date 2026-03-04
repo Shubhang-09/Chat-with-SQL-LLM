@@ -28,6 +28,13 @@ selected_opt = st.sidebar.radio(
     radio_opt
 )
 
+# Show message when MySQL option is selected
+if radio_opt.index(selected_opt) == 1:
+    st.sidebar.info(
+        "⚠️ Remote MySQL database required for the deployed app.\n\n"
+        "Localhost databases will only work when running the app locally."
+    )
+
 if radio_opt.index(selected_opt) == 1:
     db_uri = MYSQL
     mysql_host = st.sidebar.text_input("MySQL Host")
